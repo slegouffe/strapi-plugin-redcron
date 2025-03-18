@@ -1,6 +1,4 @@
-'use strict'
-
-module.exports = {
+export default {
   default: {
     redlockConfig:{
       driftFactor: 0.01,
@@ -13,4 +11,4 @@ module.exports = {
     debug: false,
   },
   validator() {},
-}
+};

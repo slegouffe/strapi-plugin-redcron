@@ -1,9 +1,15 @@
-'use strict'
-const { default: Redlock } = require('redlock')
-const debug = require('debug')('strapi:plugin:redcron')
+import debug from 'debug';
 
-module.exports = ({ strapi }) => {
-  const config = strapi.config.get('plugin.redcron')
+import Redlock from 'redlock';
+
+const register = ({ strapi }) => {
+  if(strapi.config.get('plugin::redcron-v5').debug) {
+    debug.enable('strapi:plugin:redcron-v5');
+  }
+  // register phase
+  debug('strapi:plugin:redcron-v5')('\n*** register redcron ***');
+
+  const config = strapi.config.get('plugin::redcron-v5')
   const originalAdd = strapi.cron.add
 
   strapi.cron.add = (tasks) => {
@@ -59,4 +65,6 @@ module.exports = ({ strapi }) => {
     })
     originalAdd(tasks)
   }
-}
+};
+
+export default register;
